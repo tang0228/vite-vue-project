@@ -1,11 +1,12 @@
 <template>
-    <div class="dialog" :style="{ 'width': width }" v-if="visible">
+    <div class="dialog" :style="{ 'width': width }">
         <div class="dialog-header">
+            {{ title }}
         </div>
         <div class="dialog-content">
         </div>
         <div class="dialog-footer">
-            <button @click="handleCancel">取消</button>
+            <button @click="emits('handleCancel')">取消</button>
         </div>
     </div>
 </template>
@@ -13,7 +14,6 @@
 <script setup>
 defineProps({
     title: String,
-    visible: Boolean,
     width: {
         type: [String, Number],
         default: '40%'
@@ -28,23 +28,18 @@ defineProps({
     }
 })
 
-const emits = defineEmits(['cancel'])
-
-const handleCancel = () => {
-    emits('calcel', false)
-}
+const emits = defineEmits(['handleCancel'])
 
 </script>
 
 <style lang="less">
 .dialog {
-    // background-color: @blue;
 
     .dialog-header,
     .dialog-content,
     .dialog-footer {
         width: 100%
-    } 
+    }
 
 
 }
